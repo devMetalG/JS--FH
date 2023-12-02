@@ -4,6 +4,8 @@
  * 2H = Two of Hearts 
  * 2S = Two of Spades 
 */
+const toast = document.querySelector('.toast')
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
 
 let deck = []
 const tipos = ['C', 'D', 'H', 'S']
@@ -21,10 +23,29 @@ const crearDeck = () => {
       deck.push(esp + tipo)
     }
   }
-  console.log(deck)
   deck = _.shuffle(deck)
   console.log(deck)
   return deck
 }
 
 crearDeck()
+
+const pedirCarta = () => {
+  if (deck.length === 0) {
+    toastBootstrap.show()
+    return
+  }
+  const carta = deck.pop()
+  return carta
+}
+
+const valorCarta = carta => {
+  const valor = carta.substring(0, carta.length - 1)
+
+  return isNaN(valor) 
+    ? valor === 'A' ?  11 :  10 
+    : Number(valor) 
+}
+
+const valor = valorCarta(pedirCarta())
+console.log(valor)
