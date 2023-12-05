@@ -6,10 +6,15 @@
 */
 const toast = document.querySelector('.toast')
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+const btnPedir = document.querySelector('#btnPedir')
+const spans = document.querySelectorAll('span')
 
 let deck = []
 const tipos = ['C', 'D', 'H', 'S']
 const especiales = ['A', 'J', 'Q', 'K']
+
+let puntosJugador = 0
+let puntosComputadora = 0
 
 const crearDeck = () => {
   for (let i = 2; i <= 10; i++) {
@@ -47,5 +52,10 @@ const valorCarta = carta => {
     : Number(valor) 
 }
 
-const valor = valorCarta(pedirCarta())
-console.log(valor)
+// Eventos
+btnPedir.addEventListener('click', () => {
+  const carta = pedirCarta() 
+
+  puntosJugador += valorCarta(carta)
+  spans[0].textContent = puntosJugador
+})
