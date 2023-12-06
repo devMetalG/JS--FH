@@ -7,6 +7,7 @@
 const body = document.querySelector('BODY')
 const btnPedir = document.querySelector('#btnPedir')
 const btnDetener = document.querySelector('#btnDetener')
+const btnNuevoJuego = document.querySelector('#btnNuevo')
 const spans = document.querySelectorAll('span')
 const cartasJugador = document.querySelector('#jugador-cartas')
 const cartasComputadora = document.querySelector('#computadora-cartas')
@@ -31,7 +32,6 @@ const crearDeck = () => {
     }
   }
   deck = _.shuffle(deck)
-  console.log(deck)
   return deck
 }
 
@@ -70,6 +70,14 @@ const turnoComputadora = (puntosMinimos) => {
       break
     }
   } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21))
+
+  if (puntosMinimos === puntosComputadora) {
+    crearAlerta('Empate!')
+  } else if (puntosComputadora > 21) {
+    crearAlerta('Ganaste!')
+  } else if (puntosComputadora > puntosMinimos && puntosComputadora <= 21) {
+    crearAlerta('Gano la computadora')
+  } 
 }
 
 function crearAlerta (msg) {
@@ -118,6 +126,12 @@ function crearAlerta (msg) {
   body.appendChild(toastContainer)
 }
 
+function limpiarHTML (section) {
+  while(section.firstChild){
+    section.removeChild(section.firstChild)
+  }
+}
+
 // Eventos
 btnPedir.addEventListener('click', () => {
   const carta = pedirCarta() 
@@ -131,7 +145,7 @@ btnPedir.addEventListener('click', () => {
   cartasJugador.appendChild(imgCarta)
 
   if (puntosJugador > 21) {
-    crearAlerta('Perdiste')
+    crearAlerta('Gano la computadora')
     btnPedir.disabled = true
     btnDetener.disabled = true
     turnoComputadora(puntosJugador)
@@ -148,4 +162,19 @@ btnDetener.addEventListener('click', () => {
   btnPedir.disabled = true
 
   turnoComputadora(puntosJugador)
+})
+
+btnNuevoJuego.addEventListener('click', () => {
+  deck = []
+  deck = crearDeck()
+  puntosComputadora = 0
+  puntosJugador = 0
+  spans[0].textContent = 0
+  spans[1].textContent = 0
+  btnDetener.disabled = false
+  btnPedir.disabled = false
+
+  limpiarHTML(cartasJugador)
+  limpiarHTML(cartasComputadora)
+
 })
