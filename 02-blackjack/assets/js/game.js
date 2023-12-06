@@ -6,6 +6,7 @@
 */
 const body = document.querySelector('BODY')
 const btnPedir = document.querySelector('#btnPedir')
+const btnDetener = document.querySelector('#btnDetener')
 const spans = document.querySelectorAll('span')
 const cartasJugador = document.querySelector('#jugador-cartas')
 const cartasComputadora = document.querySelector('#computadora-cartas')
@@ -51,6 +52,24 @@ const valorCarta = carta => {
   return isNaN(valor) 
     ? valor === 'A' ?  11 :  10 
     : Number(valor) 
+}
+
+// Turno de la computadora
+const turnoComputadora = (puntosMinimos) => {
+  do {
+    const carta = pedirCarta() 
+    puntosComputadora += valorCarta(carta)
+    spans[1].textContent = puntosComputadora
+
+    const imgCarta = document.createElement('IMG')
+    imgCarta.classList.add('carta')
+    imgCarta.src = `assets/cartas/${carta}.png`
+
+    cartasComputadora.appendChild(imgCarta)
+    if (puntosMinimos > 21) {
+      break
+    }
+  } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21))
 }
 
 function crearAlerta (msg) {
@@ -114,8 +133,19 @@ btnPedir.addEventListener('click', () => {
   if (puntosJugador > 21) {
     crearAlerta('Perdiste')
     btnPedir.disabled = true
+    btnDetener.disabled = true
+    turnoComputadora(puntosJugador)
   } else if (puntosJugador === 21) {
     crearAlerta('21! Genial')
     btnPedir.disabled = true
+    btnDetener.disabled = true
+    turnoComputadora(puntosJugador)
   }
+})
+
+btnDetener.addEventListener('click', () => {
+  btnDetener.disabled = true
+  btnPedir.disabled = true
+
+  turnoComputadora(puntosJugador)
 })
