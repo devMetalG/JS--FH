@@ -1,4 +1,15 @@
 class Persona {
+
+  static _conteo = 0
+  static get conteo(){
+    return Persona._conteo + ' Instancias'
+  }
+
+  static mensaje (){
+    console.log(this.nombre)
+    console.log('Hola a todos metodo static')
+  }
+
   nombre = ''
   codigo = ''
   frase = ''
@@ -8,6 +19,8 @@ class Persona {
     this.nombre = nombre
     this.codigo = codigo
     this.frase = frase
+
+    Persona._conteo ++
   }
 
   set setComidaFavorita(comida){
@@ -29,11 +42,16 @@ class Persona {
 
 const spiderman = new Persona('Peter Parker', 'Spiderman', 'Soy tu amigable vecino Spiderman')
 const ironman = new Persona('Tony Stark', 'IronMan', 'Yo soy Ironman')
-console.log(ironman)
+// console.log(ironman)
 
+// Persona._conteo = 2
 
 spiderman.miFrase()
 
 spiderman.setComidaFavorita = 'El pay de cereza'
 console.log(spiderman.getComidaFavorita)
-console.log(spiderman)
+// console.log(spiderman)
+console.log('Conteo estatico:', Persona._conteo)
+console.log(Persona.conteo)
+
+Persona.mensaje()
