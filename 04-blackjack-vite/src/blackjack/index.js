@@ -4,7 +4,8 @@ import {
   crearDeck, 
   pedirCarta, 
   valorCarta,
-  crearAlerta
+  crearAlerta,
+  limpiarHTML
 } from './usecases'
 
 const miModulo = (() => {
@@ -75,12 +76,6 @@ const miModulo = (() => {
     } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21))
   
     determinarGanador()  
-  }
-  
-  function limpiarHTML (section) {
-    while(section.firstChild){
-      section.removeChild(section.firstChild)
-    }
   }
   
   // Eventos
