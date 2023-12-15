@@ -5,7 +5,8 @@ import {
   pedirCarta, 
   valorCarta,
   crearAlerta,
-  limpiarHTML
+  limpiarHTML,
+  crearCarta
 } from './usecases'
 
 const miModulo = (() => {
@@ -44,14 +45,6 @@ const miModulo = (() => {
     return puntosJugadores[turno]
   }
 
-  const crearCarta = (carta, turno) => {
-    const imgCarta = document.createElement('IMG')
-    imgCarta.classList.add('carta')
-    imgCarta.src = `assets/cartas/${carta}.png`
-  
-    divCartasJugador[turno].appendChild(imgCarta)
-  }
-
   const determinarGanador = () => {
 
     const [puntosMinimos, puntosComputadora] = puntosJugadores
@@ -71,7 +64,9 @@ const miModulo = (() => {
     do {
       const carta = pedirCarta(deck)
       puntosComputadora = acumularPuntos(puntosJugadores.length - 1,carta)
-      crearCarta(carta, puntosJugadores.length - 1)
+      const imgCarta = crearCarta(carta)
+      divCartasJugador[puntosJugadores.length - 1].appendChild(imgCarta)
+
   
     } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21))
   
@@ -83,7 +78,8 @@ const miModulo = (() => {
     const carta = pedirCarta(deck) 
     const puntosJugador = acumularPuntos(0, carta)
   
-    crearCarta(carta, 0)
+    const imgCarta = crearCarta(carta)
+    divCartasJugador[0].appendChild(imgCarta)
   
     if (puntosJugador > 21) {
       crearAlerta('Gano la computadora')
