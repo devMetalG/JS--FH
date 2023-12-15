@@ -7,10 +7,10 @@ import {
 const divCartasJugador = document.querySelectorAll('.div-cartas')
 // Turno de la computadora
 /**
- * 
+ * Juega la computadora
  * @param {Number} puntosMinimos Ejemplo: 20 
- * @param {*} puntos 
- * @param {*} deck 
+ * @param {Array<Number>} puntosJugadores Ejemplo: [0,0]
+ * @param {Array<String>} deck Deck de cartas
  */
 export const turnoComputadora = (puntosMinimos, puntosJugadores, deck) => {
   let puntosComputadora = 0
