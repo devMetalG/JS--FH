@@ -7,10 +7,12 @@ import _ from 'underscore'
  * @returns {Array<String>} retorna deck de cartas
  */
 export const crearDeck = (tiposDeCarta, tiposEspeciales) => {
-  if (!tiposDeCarta || tiposDeCarta.length > 0) 
+  if (!tiposDeCarta || tiposDeCarta.length === 0) {
     throw new Error('tiposDeCarta es obligatorio')
-  if (!tiposEspeciales || tiposEspeciales.length > 0) 
+  }
+  if (!tiposEspeciales || tiposEspeciales.length === 0) {
     throw new Error('tiposEspeciales es obligatorio')
+  }
   let deck = []
   let tipo = ''
   for (let i = 2; i <= 10; i++) {

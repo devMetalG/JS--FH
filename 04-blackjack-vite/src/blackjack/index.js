@@ -1,5 +1,7 @@
 import _ from 'underscore'
 import { crearDeck } from './usecases/crear-deck'
+import { pedirCarta } from './usecases/pedir-carta'
+import { valorCarta } from './usecases/valor-carta'
 
 const miModulo = (() => {
   'use strict'
@@ -29,23 +31,6 @@ const miModulo = (() => {
     btnPedir.disabled = false
     
     divCartasJugador.forEach(jugador => limpiarHTML(jugador))
-  }
-  
-  
-  const pedirCarta = () => {
-    if (deck.length === 0) {
-      crearAlerta('No hay más cartas')
-      return
-    }
-    return deck.pop()
-  }
-  
-  const valorCarta = carta => {
-    const valor = carta.substring(0, carta.length - 1)
-  
-    return isNaN(valor) 
-      ? valor === 'A' ?  11 :  10 
-      : Number(valor) 
   }
 
   const acumularPuntos =  (turno, carta) => {
@@ -79,7 +64,7 @@ const miModulo = (() => {
   const turnoComputadora = puntosMinimos => {
     let puntosComputadora = 0
     do {
-      const carta = pedirCarta()
+      const carta = pedirCarta(deck)
       puntosComputadora = acumularPuntos(puntosJugadores.length - 1,carta)
       crearCarta(carta, puntosJugadores.length - 1)
   
@@ -142,7 +127,7 @@ const miModulo = (() => {
   
   // Eventos
   btnPedir.addEventListener('click', () => {
-    const carta = pedirCarta() 
+    const carta = pedirCarta(deck) 
     const puntosJugador = acumularPuntos(0, carta)
   
     crearCarta(carta, 0)
