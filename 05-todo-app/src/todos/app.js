@@ -28,6 +28,7 @@ export const App = (elementID) => {
 
   // Referencias
   const newDescriptionInput = document.querySelector(elementIDs.newTodoInput)
+  const todoListUL = document.querySelector(elementIDs.todoList)
 
   // Listeners
   newDescriptionInput.addEventListener('keyup', e => {
@@ -37,5 +38,11 @@ export const App = (elementID) => {
     todoStore.addTodo(e.target.value)
     displayTodos()
     e.target.value = ''
+  })
+
+  todoListUL.addEventListener('click', e => {
+    const element = e.target.closest('[data-id]')
+    todoStore.toggleTodo(element.getAttribute('data-id'))
+    displayTodos()
   })
 }
