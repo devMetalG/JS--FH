@@ -4,7 +4,8 @@ import { renderTodos } from './use-cases'
 
 const elementIDs = {
   todoList: '.todo-list',
-  newTodoInput: '#new-todo-input'
+  newTodoInput: '#new-todo-input',
+  destroy: '.destroy'
 }
 
 /**
@@ -44,5 +45,15 @@ export const App = (elementID) => {
     const element = e.target.closest('[data-id]')
     todoStore.toggleTodo(element.getAttribute('data-id'))
     displayTodos()
+  })
+  
+  todoListUL.addEventListener('click', e => {
+    const destroy = e.target.className === 'destroy'
+    if (destroy) {
+      const id = e.target.closest('[data-id]').getAttribute('data-id')
+      todoStore.deleteTodo(id)
+      displayTodos()
+    }
+    
   })
 }
