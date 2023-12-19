@@ -3,7 +3,8 @@ import html from './app.html?raw'
 import { renderTodos } from './use-cases'
 
 const elementIDs = {
-  todoList: '.todo-list'
+  todoList: '.todo-list',
+  newTodoInput: '#new-todo-input'
 }
 
 /**
@@ -24,4 +25,17 @@ export const App = (elementID) => {
     document.querySelector(elementID).appendChild(app)
     displayTodos()
   })()
+
+  // Referencias
+  const newDescriptionInput = document.querySelector(elementIDs.newTodoInput)
+
+  // Listeners
+  newDescriptionInput.addEventListener('keyup', e => {
+    if (e.key !== 'Enter') return
+    if (e.target.value.trim().length === 0) return
+
+    todoStore.addTodo(e.target.value)
+    displayTodos()
+    e.target.value = ''
+  })
 }
