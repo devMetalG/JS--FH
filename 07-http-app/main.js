@@ -16,7 +16,9 @@ document.querySelector('#app').innerHTML = `
     <div class="card">
 
     </div>
+    <button id="another">Gen Character!</button>
   </div>
 `
 const element = document.querySelector('.card')
-RickAndMortyApp(element)
+const another = document.querySelector('#another')
+RickAndMortyApp(element, another)
