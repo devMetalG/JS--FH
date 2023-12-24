@@ -26,6 +26,7 @@ export const RickAndMortyApp = (element, btn) => {
   document.querySelector('#app-title').innerHTML = 'Rick&Morty App'
 
   btn.addEventListener('click', async () => {
+    element.innerHTML = 'Loading...'
     let { name, image, species } = await getCharacter(genRandom())
     element.innerHTML = `
     <h1>${name}</h1>
