@@ -11,8 +11,6 @@ export const usersApp = async element => {
   await usersStore.loadNextPage()
   element.innerHTML = ''
 
-  console.log(usersStore.getUsers())
-
   RenderTable(element)
   RenderButtons(element)
 }

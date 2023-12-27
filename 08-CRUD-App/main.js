@@ -1,7 +1,7 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
-import { usersApp } from './users/users-app'
+import { usersApp } from './src/users/users-app'
 
 document.querySelector('#app').innerHTML = `
   <div>
