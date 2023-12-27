@@ -1,0 +1,17 @@
+import modalHTML from './render-modal.html?raw'
+import './render-modal.css'
+
+let modal
+
+/**
+ * 
+ * @param {HTMLDivElement} element 
+ */
+export const RenderModal = (element) => {
+  if(modal) return
+  modal = document.createElement('div')
+  modal. innerHTML = modalHTML
+  modal.classList.add('modal-container', 'hide-modal')
+
+  element.append(modal)
+}
