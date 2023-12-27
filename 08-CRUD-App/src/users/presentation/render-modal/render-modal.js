@@ -58,6 +58,11 @@ export const RenderModal = (element, callback) => {
     e.preventDefault()
 
     const formData = new FormData(form)
+
+    if (!formData.get('isActive')) {
+      formData.append('isActive', 'off')
+    }
+
     const userLike = {...loadedUser}
     for (const [key, value] of formData) {
       if(key === 'balance') {
