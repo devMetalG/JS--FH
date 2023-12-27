@@ -1,3 +1,4 @@
+import { showModal } from '../render-modal/render-modal'
 import './render-add-button.css'
 
 /**
@@ -13,6 +14,6 @@ export const RenderAddButton = (element) => {
   element.append(addButton)
 
   addButton.addEventListener('click', () => {
-    throw Error('Not implemented.')
+    showModal()
   })
 }
