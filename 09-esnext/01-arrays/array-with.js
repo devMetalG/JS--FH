@@ -1,4 +1,4 @@
-const superHeroes = [
+const state = [
   {
     id: 1,
     name:'batman'
@@ -17,12 +17,15 @@ const superHeroes = [
   },
 ]
 
-// Hacer uso del spread operator si dentro del arreglo hay primitivos
-// const superHeroesCopy = [...superHeroes]
+const index = 1
+const newName = 'SuperGirl'
 
-// Structured Clone
-const superHeroesCopy = structuredClone(superHeroes)
+const newState = state.with(index , {
+  ...state.at(index),
+  name: newName
+})
 
-superHeroesCopy[3].name = 'Flash'
-console.table(superHeroes)
-console.table(superHeroesCopy)
+state[0].name = 'Robin'
+console.table(newState)
+
+console.log('El ultimo: ', state.at(-1))
