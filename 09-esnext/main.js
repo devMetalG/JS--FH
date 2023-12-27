@@ -1,5 +1,6 @@
 import './style.css'
-import './01-arrays/array-with'
+// import './01-arrays/array-with'
+import './01-arrays/array-to-methods'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 
