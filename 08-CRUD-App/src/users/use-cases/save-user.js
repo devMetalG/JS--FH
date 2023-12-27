@@ -1,3 +1,4 @@
+import { userModelToLocalhost } from '../mappers/user-to-localhost.mapper'
 import {User} from '../models/user'
 /**
  * 
@@ -5,14 +6,19 @@ import {User} from '../models/user'
  */
 export const saveUser = async (userLike) => {
 
+  
   const user = new User(userLike)
-  //TODO: Falta mapper
+  if(!user.firstName || !user.lastName) {
+    throw 'First & Last name are required.'
+  }
+
+  const userToSave = userModelToLocalhost(user)
 
   if (user.id) {
     throw 'Not implemented.'
   }
 
-  const updatedUser = await createUser(user)
+  const updatedUser = await createUser(userToSave)
   return updatedUser
 }
 
